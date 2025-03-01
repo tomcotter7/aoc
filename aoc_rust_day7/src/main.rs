@@ -14,12 +14,17 @@ fn reaches_value(target: i64, values: Vec<i64>) -> bool {
 
         let mut new_values_m = vec![first * second];
         new_values_m.extend(&values[2..]);
-        return reaches_value(target, new_values_a) || reaches_value(target, new_values_m);
-    }
 
+        let concatenated = first.to_string() + &second.to_string();
+        let concatenated = concatenated.parse::<i64>().unwrap();
+        let mut new_values_c = vec![concatenated];
+        new_values_c.extend(&values[2..]);
+
+        return reaches_value(target, new_values_a) || reaches_value(target, new_values_m) || reaches_value(target, new_values_c);
+    }
 }
 
-fn part1() {
+fn main() {
     let file = fs::read_to_string("input.txt").unwrap();
     let lines = file.lines(); 
 
@@ -38,9 +43,4 @@ fn part1() {
     }
 
     println!("Total: {}", total);   
-}
-
-
-fn main() {
-    part1();
 }
