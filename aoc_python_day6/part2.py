@@ -1,6 +1,8 @@
 import time
 import copy
 
+start = time.time()
+
 UP = "U"
 DOWN = "D"
 LEFT = "L"
@@ -14,6 +16,7 @@ DIRECTIONS: dict[str, tuple[int, int]] = {
 }
 DIFF = {UP: 1, DOWN: -1, LEFT: 1, RIGHT: -1}
 TURN = {UP: RIGHT, RIGHT: DOWN, DOWN: LEFT, LEFT: UP}
+
 
 debug = False
 
@@ -165,8 +168,6 @@ def move(
         board[current[0]][current[1]] = new_direction
         return current, new_direction, board
     else:
-        # board[current[0]][current[1]] = direction
-        # board[new_pos[0]][new_pos[1]] = direction
         if board[current[0]][current[1]] == ".":
             board[current[0]][current[1]] = direction
         elif direction not in board[current[0]][current[1]]:
@@ -213,6 +214,8 @@ while True:
         break
 
 print(total)
+end = time.time()
+print(f"Time take: {end - start}")
 
 # total = 0
 # for line in board:
